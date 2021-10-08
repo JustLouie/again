@@ -64,9 +64,6 @@ const addMarkerActions = (map) => {
 async function setMarkers(map, geocoder) {
     const locations = await getMarkers();
 
-    const categories = getCategories(locations);
-    setCategories(categories);
-
     for (var i = 0; i < locations.length; i++) {
         const location = locations[i];
 
