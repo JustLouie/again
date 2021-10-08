@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>გვიპოვეთ რუკაზე</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo.png">
+    <meta name="theme-color" content="#9dd239">
+    <meta property="og:title" content="გვიპოვეთ რუკაზე">
+    <meta property="og:image" content="https://again.ge/assets/img/again.jpg">
+    <meta property="og:url" content="https://again.ge/">
+    <meta property="og:site_name" content="გვიპოვეთ რუკაზე">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+  </head>
+<body>
+  <header class="header center">
+      <div class="container center">
+          <div class="logo">
+              <a href="index.html">
+                  <img src="assets/img/logo.svg" alt="">
+              </a>
+          </div>
+          <div class="marker-group center">
+              <img src="assets/img/marker.svg" alt="">
+              <span class="marker-group__title">შეგიძლიათ გვიპოვოთ აქ</span>
+          </div>
+      </div>
+  </header>
+
+  <div class='accordion' id='accordion'>
+    <div class='map-actions' id='actions'>
+      <h2>
+        მოძებნე სასურველი მაღაზია
+      </h2>
+      <div class='map-action-form'>
+        <div class='origin-input-container'>
+          <input
+            id="origin-input"
+            class="controls"
+            type="text"
+            placeholder="მიუთითე შენი ლოკაცია"
+          />
+          <i id='current-location'>
+            <img src='./assets/img/target.png' />
+          </i>
+        </div>
+        <input
+          id="destination-input"
+          class="controls"
+          type="text"
+          placeholder="მონიშნე სასურველი ობიექტი"
+        />
+        <button class="search-btn" id="search">
+          ძებნა
+        </button>
+        <button class="clear-btn" id='clear-btn' disabled>
+          გასუფთავება
+        </button>
+      </div>
+      <div class='categories' id='categories'>
+        
+      </div>
+    </div>
+    <button class='action-close-button' id='action-close'>
+      <i class='arrow top'></i>
+    </button>
+  </div>
+  
+  
+  <div id="map"></div>
+
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
+
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTNgMHYznC1RVPFyGnoG7iFUMYZ9HdX-Y&callback=initMap&libraries=places&v=weekly"
+    async
+  ></script>
+  <script src="assets/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+@font-face {
+    font-family: bpg;
+    src: url('../font/bpg_web_001.ttf');
+}
+@font-face {
+    font-family: light;
+    src: url('../font/DejaVuSans.ttf');
+}
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header{
+    width: 100%;
+    height: 80px;
+    background-image: radial-gradient(rgba(157 , 210 , 57 , 1), rgba(1 , 185 , 0 , 1 ));
+}
+.logo{
+    margin-left: 45px;
+}
+.container{
+    max-width: 1500px;
+    width: 100%;
+    justify-content: space-between;
+}
+.marker-group{
+    margin-right: 45px;
+}
+.marker-group > img{
+    margin-right: 10px;
+}
+.marker-group__title{
+    color: #fff;
+    font-family: bpg;
+    font-size: 22px;
+}
+#map{
+    width: 100%;
+    height: calc(100% - 80px);
+}
+
+.marker-title {
+    font-size: 16px;
+    text-align: center;
+    padding: 5px;
+}
+
+.marker-text{
+    font-family: light;
+    font-size: 14px;
+    width: 220px;
+    text-align: center;
+    padding: 10px;
+}
+
+.controls {
+    height: 40px;
+    outline: none;
+    border: 1px solid #1E1E1E;
+    border-radius: 5px;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  #origin-input,
+  #destination-input {
+    background-color: #fff;
+    font-family: light;
+    font-size: 15px;
+    font-weight: 300;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 230px;
+  }
+  
+.accordion {
+    width: 100vw;
+    height: auto;
+    z-index: 99;
+    transition: all 0.5s ease-in-out;
+    top: 65px;
+}
+.map-actions {
+    width: 100%;
+    padding: 20px;
+    position: absolute;
+    z-index: 99;
+    background-color: rgba(30,30,30,0.8);
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+}
+
+.map-actions.hide,.accordion.hide {
+    height: 120px;
+    /* padding: 0px; */
+}
+
+.map-actions.hide #destination-input {
+    opacity: 0;
+}
+
+.map-actions.hide #search {
+    opacity: 0;
+}
+
+.map-actions.hide .clear-btn {
+    opacity: 0;
+}
+
+.map-actions h2 {
+    font-size: 20px;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+}
+
+.map-action-form {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+  
+  
+.my-location-btn{
+    right: 80px !important;
+    bottom: 25px !important;
+    height: 40px !important;
+    top: unset !important;
+    left: unset !important;
+    background: #36c113;
+    color: #fff;
+    padding: 0px 5px;
+    border: none;
+    outline: none;
+}
+
+.clear-btn {
+    padding: 10px 20px;
+    border: 1px solid #FFFFFF;
+    border-radius: 5px;
+    color: black;
+    background: none;
+    cursor: pointer;
+    background: white;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.clear-btn:disabled {
+    border: 1px solid #FFFFFF;
+    color: white;
+    background: none;
+    opacity: 0.7;
+}
+
+#search {
+    min-height: 40px;
+    padding: 11px 20px 9px 20px;
+    background:#018B00;
+    transition: all 0.3s ease-in-out;
+    color: #fff;
+    font-family: 'light';
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 30%);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#search:hover {
+    background-color: #36c113;
+}
+
+.categories {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.categories .category {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 10px;
+}
+
+.categories .category img {
+    width: 16px;
+}
+
+.categories .category span {
+    color: white;
+}
+
+.action-close-button {
+    display: none;
+}
+
+.origin-input-container {
+    position: relative;
+}
+.origin-input-container i {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.origin-input-container i img {
+    width: 12px;
+}
+
+.cluster img {
+    width: 80px;
+}
+
+.cluster span {
+    color: white;
+    line-height: 80px;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 780px) {
+    .header{
+        height: 65px;
+    }
+    #map{
+        height: calc( 100vh - 65px );
+    }
+    .logo{
+        margin-left: 10px;
+    }
+
+    .accordion {
+        position: absolute;
+        height: 360px;
+    }
+
+    .map-actions {
+        height: 100%;
+    }
+    .map-action-form {
+        flex-direction: column;
+    }
+    .marker-group{
+        margin-right: 10px;
+        margin-left: 19px;
+    }
+    .marker-group__title{
+        font-size: 14px;
+    }
+
+    #origin-input,
+    #destination-input {
+        width: 100%;
+    }
+
+    .marker-group > img{
+        margin-right: 5px;
+        width: 25px;
+        height: 25px;
+    }
+
+    #search{
+        width: 100%;
+    }
+
+
+    .arrow {
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+
+    .arrow.top {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+        transition: all 0.5s ease;
+    }
+
+    .action-close-button {
+        width: 30px;
+        height: 30px;
+        border: none;
+        outline: none;
+        display: block;
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1E1E1E;
+        color: white;
+        padding: 5px;
+        z-index: 99;
+    }
+
+    .accordion.hide .arrow.top {
+        transform: rotate(45deg);
+    }
+
+    .categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 15px;
+    }
+}
