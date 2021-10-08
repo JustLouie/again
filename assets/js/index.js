@@ -3,44 +3,38 @@ var markers = [], marker, destMarker, originCoords, destinationCoords;
 const elem = document.querySelector('#origin-input');
 
 const getMarkers = async () => {
-  const response = await fetch('https://again.ge/api/map', {
-    method: 'GET',
-    headers: {
-      Origin: '*'
-    }
-  })
-  return response.json()
+  return []
 }
 
 const getCategories = (list) => {
-  const categories = []
+  const categories = [];
 
   list.forEach(item => {
 
-    const category = categories.find(it => it?.type?.name === item?.type?.name)
+    const category = categories.find(it => it?.type?.name === item?.type?.name);
 
     if (!category) {
-      categories.push(item)
+      categories.push(item);
     }
 
   })
 
-  return categories
+  return categories;
 }
 
 const setCategories = (list) => {
-  const wrapper = document.getElementById('categories')
+  const wrapper = document.getElementById('categories');
   list.forEach(category => {
-    const div = document.createElement('div')
-    div.classList.add('category')
-    const img = document.createElement('img')
-    const span = document.createElement('span')
-    span.innerHTML = category?.type?.name
-    img.src = category?.image
+    const div = document.createElement('div');
+    div.classList.add('category');
+    const img = document.createElement('img');
+    const span = document.createElement('span');
+    span.innerHTML = category?.type?.name;
+    img.src = category?.image;
 
-    div.appendChild(img)
-    div.appendChild(span)
-    wrapper.appendChild(div)
+    div.appendChild(img);
+    div.appendChild(span);
+    wrapper.appendChild(div);
   })
 
 }
@@ -52,7 +46,7 @@ const addMarkerActions = (map) => {
     })
 
     m.addListener('mouseout', function () {
-      m.setAnimation(null)
+      m.setAnimation(null);
     })
   })
 
@@ -68,15 +62,15 @@ const addMarkerActions = (map) => {
 }
 
 async function setMarkers(map, geocoder) {
-    const locations = await getMarkers()
+    const locations = await getMarkers();
 
-    const categories = getCategories(locations)
-    setCategories(categories)
+    const categories = getCategories(locations);
+    setCategories(categories);
 
     for (var i = 0; i < locations.length; i++) {
         const location = locations[i];
 
-        const position = {lat: Number(location?.latitude), lng: Number(location?.longitude)}
+        const position = {lat: Number(location?.latitude), lng: Number(location?.longitude)};
 
         const locationInfowindow = new google.maps.InfoWindow({
           content: `
@@ -106,7 +100,7 @@ async function setMarkers(map, geocoder) {
 
     }
 
-    addMarkerActions(map)
+    addMarkerActions(map);
 }
 
 function setFormattedAddress (geocoder, latLng, input = document.getElementById('origin-input')) {
