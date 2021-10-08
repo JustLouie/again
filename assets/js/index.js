@@ -3,21 +3,20 @@ var markers = [], marker, destMarker, originCoords, destinationCoords;
 const elem = document.querySelector('#origin-input');
 
 const getMarkers = async () => {
-  return []
+  return [];
 }
 
 const getCategories = (list) => {
   const categories = [];
 
   list.forEach(item => {
-
     const category = categories.find(it => it?.type?.name === item?.type?.name);
 
     if (!category) {
       categories.push(item);
     }
 
-  })
+  });
 
   return categories;
 }
@@ -90,9 +89,9 @@ async function setMarkers(map, geocoder) {
         google.maps.event.addListener(marker, 'click', function(event) {
             hideAllInfoWindows(map);
             this.infowindow.open(map, this);
-            document.getElementById('clear-btn').disabled = false
-            destinationCoords = event.latLng
-            setFormattedAddress(geocoder, event.latLng, document.getElementById('destination-input'))
+            document.getElementById('clear-btn').disabled = false;
+            destinationCoords = event.latLng;
+            setFormattedAddress(geocoder, event.latLng, document.getElementById('destination-input'));
         });
 
     }
@@ -106,7 +105,7 @@ function setFormattedAddress (geocoder, latLng, input = document.getElementById(
   }, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       if (results[0]) {
-        input.value = `${results[0].formatted_address}` 
+        input.value = `${results[0].formatted_address}`;
       }
     }
   })
@@ -114,9 +113,9 @@ function setFormattedAddress (geocoder, latLng, input = document.getElementById(
 
 const setMarkerOnClick = (e, map) => {
 
-  const latLng = e.latLng || e.geometry.location
+  const latLng = e.latLng || e.geometry.location;
 
-  map.panTo(latLng)
+  map.panTo(latLng);
 
   if (!marker || !marker.setPosition) {
     marker = new google.maps.Marker({
@@ -128,26 +127,26 @@ const setMarkerOnClick = (e, map) => {
   }
 
   map.setZoom(15.3)
-  setFormattedAddress(geocoder, latLng)
+  setFormattedAddress(geocoder, latLng);
 }
 
 const setDestMarkerOnClick = (e, map) => {
 
-  const latLng = e.latLng || e.geometry.location
+  const latLng = e.latLng || e.geometry.location;
 
-  map.panTo(latLng)
+  map.panTo(latLng);
 
   if (!destMarker || !destMarker.setPosition) {
     destMarker = new google.maps.Marker({
       position: latLng,
       map,
-    })
+    });
   } else {
     destMarker.setPosition(latLng);
   }
 
-  map.setZoom(15.3)
-  setFormattedAddress(geocoder, latLng, document.getElementById('destination-input'))
+  map.setZoom(15.3);
+  setFormattedAddress(geocoder, latLng, document.getElementById('destination-input'));
 }
 
 function hideAllInfoWindows(map) {
@@ -172,7 +171,7 @@ function initMap() {
 
   directionsRenderer.setMap(map);
   const onChangeHandler = function (e) {
-    document.getElementById('clear-btn').disabled = false
+    document.getElementById('clear-btn').disabled = false;
   };
   document.getElementById("search").addEventListener("click", () => {
     calculateAndDisplayRoute(directionsService, directionsRenderer);
@@ -181,34 +180,34 @@ function initMap() {
   document.getElementById("destination-input").addEventListener("change", onChangeHandler);
 
   document.getElementById('clear-btn').addEventListener('click', (e) => {
-    document.getElementById("origin-input").value = ''
-    document.getElementById("destination-input").value = ''
-    document.getElementById('clear-btn').disabled = true
+    document.getElementById("origin-input").value = '';
+    document.getElementById("destination-input").value = '';
+    document.getElementById('clear-btn').disabled = true;
     if (marker) {
-      marker.setMap(null)
-      marker = null
+      marker.setMap(null);
+      marker = null;
     }
 
     if (destMarker) {
-      destMarker.setMap(null)
-      destMarker = null
+      destMarker.setMap(null);
+      destMarker = null;
     }
 
-    directionsRenderer.setMap(null)
+    directionsRenderer.setMap(null);
   })
 
   map.addListener("click", (mapsMouseEvent) => {
-    document.getElementById('clear-btn').disabled = false
-    setMarkerOnClick(mapsMouseEvent, map)
-    originCoords = mapsMouseEvent.latLng
+    document.getElementById('clear-btn').disabled = false;
+    setMarkerOnClick(mapsMouseEvent, map);
+    originCoords = mapsMouseEvent.latLng;
   });
 
-  setMarkers(map, geocoder)
+  setMarkers(map, geocoder);
   
   new AutocompleteDirectionsHandler(map);
   infoWindow = new google.maps.InfoWindow();
 
-  const locationButton = document.getElementById('current-location')
+  const locationButton = document.getElementById('current-location');
 
   locationButton.addEventListener("click", () => {
     // Try HTML5 geolocation.
@@ -219,9 +218,9 @@ function initMap() {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-          originCoords = pos
-          setMarkerOnClick({ latLng: pos }, map)
-          document.getElementById('clear-btn').disabled = false
+          originCoords = pos;
+          setMarkerOnClick({ latLng: pos }, map);
+          document.getElementById('clear-btn').disabled = false;
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -262,11 +261,11 @@ class AutocompleteDirectionsHandler {
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
       if(mode === 'ORIG') {
-        setMarkerOnClick(place, map)
-        originCoords = place.geometry.location
+        setMarkerOnClick(place, map);
+        originCoords = place.geometry.location;
       } else if(mode === 'DEST') {
-        setDestMarkerOnClick(place, map)
-        destinationCoords = place.geometry.location
+        setDestMarkerOnClick(place, map);
+        destinationCoords = place.geometry.location;
       }
 
     });
@@ -283,7 +282,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 }
 
-let click = 0
+let click = 0;
 
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {
   directionsService
@@ -296,48 +295,48 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
       directionsRenderer.setDirections(response);
 
       setTimeout(() => {
-        const origin = response?.request?.origin?.location
-        const destination = response?.request?.destination?.location
-        const travelMode = response?.request?.travelMode
-        const link = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat()},${origin.lng()}&destination=${destination.lat()},${destination.lng()}&travelMode=${travelMode}&dir_action=navigate`
+        const origin = response?.request?.origin?.location;
+        const destination = response?.request?.destination?.location;
+        const travelMode = response?.request?.travelMode;
+        const link = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat()},${origin.lng()}&destination=${destination.lat()},${destination.lng()}&travelMode=${travelMode}&dir_action=navigate`;
         
 
         if (window.innerWidth <= 768) {
-          const actions = document.getElementById('actions')
-          const accordion = document.getElementById('accordion')
+          const actions = document.getElementById('actions');
+          const accordion = document.getElementById('accordion');
           
-          actions.classList.add('hide')
-          accordion.classList.add('hide')
+          actions.classList.add('hide');
+          accordion.classList.add('hide');
         }
 
         
         setTimeout(() => {
-          const c = confirm('გადასვლა Google Maps-ზე')
-          click = 1
+          const c = confirm('გადასვლა Google Maps-ზე');
+          click = 1;
           if (c) {
             window.open(link, '_blank').focus();
           }
-        }, 200)
+        }, 200);
         
         
-      }, 500)
+      }, 500);
      
     })
     .catch( (e) => console.error(e) );
 }
 
 document.getElementById('action-close').addEventListener('click', () => {
-  const actions = document.getElementById('actions')
-  const accordion = document.getElementById('accordion')
-  click += 1
+  const actions = document.getElementById('actions');
+  const accordion = document.getElementById('accordion');
+  click += 1;
 
   if (click === 1) {
-    actions.classList.add('hide')
-    accordion.classList.add('hide')
+    actions.classList.add('hide');
+    accordion.classList.add('hide');
   } else if (click === 2) {
-    actions.classList.remove('hide')
-    accordion.classList.remove('hide')
-    click = 0
+    actions.classList.remove('hide');
+    accordion.classList.remove('hide');
+    click = 0;
   }
 
   
