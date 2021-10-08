@@ -10,7 +10,7 @@ const getCategories = (list) => {
   const categories = [];
 
   list.forEach(item => {
-    const category = categories.find(it => it?.type?.name === item?.type?.name);
+    const category = categories.find(it => it.type.name === item.type.name);
 
     if (!category) {
       categories.push(item);
@@ -28,8 +28,8 @@ const setCategories = (list) => {
     div.classList.add('category');
     const img = document.createElement('img');
     const span = document.createElement('span');
-    span.innerHTML = category?.type?.name;
-    img.src = category?.image;
+    span.innerHTML = category.type.name;
+    img.src = category.image;
 
     div.appendChild(img);
     div.appendChild(span);
@@ -66,12 +66,12 @@ async function setMarkers(map, geocoder) {
     for (var i = 0; i < locations.length; i++) {
         const location = locations[i];
 
-        const position = {lat: Number(location?.latitude), lng: Number(location?.longitude)};
+        const position = {lat: Number(location.latitude), lng: Number(location.longitude)};
 
         const locationInfowindow = new google.maps.InfoWindow({
           content: `
-            <h2 class='marker-title'>${location?.type?.name}</h2>
-            <p class="marker-text">${location?.title}</p>
+            <h2 class='marker-title'>${location.type.name}</h2>
+            <p class="marker-text">${location.title}</p>
           `,
         });
 
@@ -79,9 +79,9 @@ async function setMarkers(map, geocoder) {
             position,
             map,
             animation: google.maps.Animation.DROP,
-            title: location?.title,
+            title: location.title,
             infowindow: locationInfowindow,
-            icon: location?.image
+            icon: location.image
         });
 
         markers.push(marker);
@@ -295,9 +295,9 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
       directionsRenderer.setDirections(response);
 
       setTimeout(() => {
-        const origin = response?.request?.origin?.location;
-        const destination = response?.request?.destination?.location;
-        const travelMode = response?.request?.travelMode;
+        const origin = response.request.origin.location;
+        const destination = response.request.destination.location;
+        const travelMode = response.request.travelMode;
         const link = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat()},${origin.lng()}&destination=${destination.lat()},${destination.lng()}&travelMode=${travelMode}&dir_action=navigate`;
         
 
