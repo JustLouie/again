@@ -3,7 +3,13 @@ var markers = [], marker, destMarker, originCoords, destinationCoords;
 const elem = document.querySelector('#origin-input');
 
 const getMarkers = async () => {
-  return [];
+  const response = await fetch('https://again.ge/api/map', {
+    method: 'GET',
+    headers: {
+      Origin: '*'
+    }
+  });
+  return response.json();
 }
 
 const getCategories = (list) => {
@@ -62,6 +68,9 @@ const addMarkerActions = (map) => {
 
 async function setMarkers(map, geocoder) {
     const locations = await getMarkers();
+
+    const categories = getCategories(locations);
+    setCategories(categories);
 
     for (var i = 0; i < locations.length; i++) {
         const location = locations[i];
