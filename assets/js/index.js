@@ -287,6 +287,25 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 let click = 0;
 
+const LinkRedirect = (response) => {
+  setTimeout(() => {
+    const origin = response.request.origin.location;
+    const destination = response.request.destination.location;
+    const travelMode = response.request.travelMode;
+    const link = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat()},${origin.lng()}&destination=${destination.lat()},${destination.lng()}&travelMode=${travelMode}&dir_action=navigate`;
+    
+
+    const c = confirm('გადასვლა Google Maps-ზე');
+    
+    click = 1;
+    
+    if (c) {
+        window.open(link, '_blank').focus();
+    }
+    
+  }, 700);
+}
+
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {
   directionsService
     .route({
@@ -297,36 +316,22 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     .then((response) => {
       directionsRenderer.setDirections(response);
 
-      setTimeout(() => {
-        const origin = response.request.origin.location;
-        const destination = response.request.destination.location;
-        const travelMode = response.request.travelMode;
-        const link = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat()},${origin.lng()}&destination=${destination.lat()},${destination.lng()}&travelMode=${travelMode}&dir_action=navigate`;
+      if (window.innerWidth <= 768) {
+        const actions = document.getElementById('actions');
+        const accordion = document.getElementById('accordion');
         
+        actions.classList.add('hide');
+        accordion.classList.add('hide');
 
-        if (window.innerWidth <= 768) {
-          const actions = document.getElementById('actions');
-          const accordion = document.getElementById('accordion');
-          
-          actions.classList.add('hide');
-          accordion.classList.add('hide');
-        }
+      }
+      
+      LinkRedirect(response)
 
-        
-        setTimeout(() => {
-          const c = confirm('გადასვლა Google Maps-ზე');
-          click = 1;
-          if (c) {
-            window.open(link, '_blank').focus();
-          }
-        }, 200);
-        
-        
-      }, 500);
-     
     })
     .catch( (e) => console.error(e) );
 }
+
+
 
 document.getElementById('action-close').addEventListener('click', () => {
   const actions = document.getElementById('actions');
