@@ -316,8 +316,8 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
         setTimeout(() => {
           const c = confirm('გადასვლა Google Maps-ზე');
           click = 1;
-          if (c) {
-            window.open(link, '_blank').focus();
+          if (c && window) {
+            window.open(link, '_blank');
           }
         }, 200);
         
