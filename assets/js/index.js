@@ -1,9 +1,9 @@
 var markers = [], marker, destMarker, originCoords, destinationCoords;
 
-const elem = document.querySelector('#origin-input');
+var elem = document.querySelector('#origin-input');
 
 async function getMarkers () {
-  const response = await fetch('https://again.ge/api/map', {
+  var response = await fetch('https://again.ge/api/map', {
     method: 'GET',
     headers: {
       Origin: '*'
@@ -13,10 +13,10 @@ async function getMarkers () {
 }
 
 function getCategories(list) {
-  const categories = [];
+  var categories = [];
 
   list.forEach(item => {
-    const category = categories.find(function(it) {
+    var category = categories.find(function(it) {
       return it.type.name === item.type.name
     });
 
@@ -30,12 +30,12 @@ function getCategories(list) {
 }
 
 function setCategories (list) {
-  const wrapper = document.getElementById('categories');
+  var wrapper = document.getElementById('categories');
   list.forEach(category => {
-    const div = document.createElement('div');
+    var div = document.createElement('div');
     div.classList.add('category');
-    const img = document.createElement('img');
-    const span = document.createElement('span');
+    var img = document.createElement('img');
+    var span = document.createElement('span');
     span.innerHTML = category.type.name;
     img.src = category.image;
 
@@ -69,24 +69,24 @@ function addMarkerActions (map) {
 }
 
 async function setMarkers (map, geocoder) {
-    const locations = await getMarkers();
+    var locations = await getMarkers();
 
-    const categories = getCategories(locations);
+    var categories = getCategories(locations);
     setCategories(categories);
 
     for (var i = 0; i < locations.length; i++) {
-        const location = locations[i];
+        var location = locations[i];
 
-        const position = {lat: Number(location.latitude), lng: Number(location.longitude)};
+        var position = {lat: Number(location.latitude), lng: Number(location.longitude)};
 
-        const locationInfowindow = new google.maps.InfoWindow({
+        var locationInfowindow = new google.maps.InfoWindow({
           content: `
             <h2 class='marker-title'>${location.type.name}</h2>
             <p class="marker-text">${location.title}</p>
           `,
         });
 
-        const marker = new google.maps.Marker({
+        var marker = new google.maps.Marker({
             position,
             map,
             animation: google.maps.Animation.DROP,
@@ -124,7 +124,7 @@ function setFormattedAddress (geocoder, latLng, input = document.getElementById(
 
 function setMarkerOnClick (e, map) {
 
-  const latLng = e.latLng || e.geometry.location;
+  var latLng = e.latLng || e.geometry.location;
 
   map.panTo(latLng);
 
@@ -143,7 +143,7 @@ function setMarkerOnClick (e, map) {
 
 function setDestMarkerOnClick(e, map) {
 
-  const latLng = e.latLng || e.geometry.location;
+  var latLng = e.latLng || e.geometry.location;
 
   map.panTo(latLng);
 
@@ -166,11 +166,11 @@ function hideAllInfoWindows(map) {
     }); 
 }
 
-let map, infoWindow, geocoder;
+var map, infoWindow, geocoder;
 
 function initMap() {
-  const directionsService = new google.maps.DirectionsService();
-  const directionsRenderer = new google.maps.DirectionsRenderer();
+  var directionsService = new google.maps.DirectionsService();
+  var directionsRenderer = new google.maps.DirectionsRenderer();
   
   map = new google.maps.Map(document.getElementById('map'), {
     mapTypeControl: false,
@@ -182,7 +182,7 @@ function initMap() {
   geocoder = new google.maps.Geocoder();
 
   directionsRenderer.setMap(map);
-  const onChangeHandler = function (e) {
+  var onChangeHandler = function (e) {
     document.getElementById('clear-btn').disabled = false;
   };
   document.getElementById("search").addEventListener("click", () => {
@@ -219,14 +219,14 @@ function initMap() {
   new AutocompleteDirectionsHandler(map);
   infoWindow = new google.maps.InfoWindow();
 
-  const locationButton = document.getElementById('current-location');
+  var locationButton = document.getElementById('current-location');
 
   locationButton.addEventListener("click", function () {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const pos = {
+          var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
@@ -245,15 +245,15 @@ function initMap() {
   });
 }
 class AutocompleteDirectionsHandler {
-  constructor(map) {
+  varructor(map) {
     this.map = map;
     this.travelMode = google.maps.TravelMode.DRIVING;
-    const originInput = document.getElementById("origin-input");
-    const destinationInput = document.getElementById("destination-input");
-    const originAutocomplete = new google.maps.places.Autocomplete(originInput, {
+    var originInput = document.getElementById("origin-input");
+    var destinationInput = document.getElementById("destination-input");
+    var originAutocomplete = new google.maps.places.Autocomplete(originInput, {
       types: ['geocode']
     });
-    const destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput,{
+    var destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput,{
       types: ['geocode']
     });
     this.setupPlaceChangedListener(originAutocomplete, "ORIG");
@@ -265,7 +265,7 @@ class AutocompleteDirectionsHandler {
   setupPlaceChangedListener(autocomplete, mode) {
     autocomplete.bindTo("bounds", this.map);
     autocomplete.addListener("place_changed", () => {
-      const place = autocomplete.getPlace();
+      var place = autocomplete.getPlace();
       if(mode === 'ORIG') {
         setMarkerOnClick(place, map);
         originCoords = place.geometry.location;
@@ -288,17 +288,17 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.open(map);
 }
 
-let click = 0;
+var click = 0;
 
 function LinkRedirect(response) {
   setTimeout(function () {
-    const origin = response.request.origin.location;
-    const destination = response.request.destination.location;
-    const travelMode = response.request.travelMode;
-    const link = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat()},${origin.lng()}&destination=${destination.lat()},${destination.lng()}&travelMode=${travelMode}&dir_action=navigate`;
+    var origin = response.request.origin.location;
+    var destination = response.request.destination.location;
+    var travelMode = response.request.travelMode;
+    var link = `https://www.google.com/maps/dir/?api=1&origin=${origin.lat()},${origin.lng()}&destination=${destination.lat()},${destination.lng()}&travelMode=${travelMode}&dir_action=navigate`;
     
 
-    const c = confirm('გადასვლა Google Maps-ზე');
+    var c = confirm('გადასვლა Google Maps-ზე');
     
     click = 1;
     
@@ -326,8 +326,8 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
       directionsRenderer.setDirections(response);
 
       if (window.innerWidth <= 768) {
-        const actions = document.getElementById('actions');
-        const accordion = document.getElementById('accordion');
+        var actions = document.getElementById('actions');
+        var accordion = document.getElementById('accordion');
         
         actions.classList.add('hide');
         accordion.classList.add('hide');
@@ -341,12 +341,12 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 }
 
 
-const action = document.getElementById('action-close')
+var action = document.getElementById('action-close')
 
 if (action) {
   action.addEventListener('click', function () {
-    const actions = document.getElementById('actions');
-    const accordion = document.getElementById('accordion');
+    var actions = document.getElementById('actions');
+    var accordion = document.getElementById('accordion');
     click += 1;
   
     if (click === 1) {
