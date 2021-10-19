@@ -2,7 +2,7 @@ var markers = [], marker, destMarker, originCoords, destinationCoords;
 
 const elem = document.querySelector('#origin-input');
 
-const getMarkers = async function () {
+async function getMarkers () {
   const response = await fetch('https://again.ge/api/map', {
     method: 'GET',
     headers: {
@@ -12,7 +12,7 @@ const getMarkers = async function () {
   return response.json();
 }
 
-const getCategories = function(list) {
+function getCategories(list) {
   const categories = [];
 
   list.forEach(item => {
@@ -29,7 +29,7 @@ const getCategories = function(list) {
   return categories;
 }
 
-const setCategories = function (list) {
+function setCategories (list) {
   const wrapper = document.getElementById('categories');
   list.forEach(category => {
     const div = document.createElement('div');
@@ -46,7 +46,7 @@ const setCategories = function (list) {
 
 }
 
-const addMarkerActions = function (map) {
+function addMarkerActions (map) {
   markers.forEach(m => {
     m.addListener('mouseover', function() {
       m.setAnimation(google.maps.Animation.BOUNCE);
@@ -68,7 +68,7 @@ const addMarkerActions = function (map) {
   });
 }
 
-async function setMarkers(map, geocoder) {
+async function setMarkers (map, geocoder) {
     const locations = await getMarkers();
 
     const categories = getCategories(locations);
@@ -122,7 +122,7 @@ function setFormattedAddress (geocoder, latLng, input = document.getElementById(
   })
 }
 
-const setMarkerOnClick = function (e, map) {
+function setMarkerOnClick (e, map) {
 
   const latLng = e.latLng || e.geometry.location;
 
@@ -141,7 +141,7 @@ const setMarkerOnClick = function (e, map) {
   setFormattedAddress(geocoder, latLng);
 }
 
-const setDestMarkerOnClick = function(e, map) {
+function setDestMarkerOnClick(e, map) {
 
   const latLng = e.latLng || e.geometry.location;
 
@@ -167,6 +167,7 @@ function hideAllInfoWindows(map) {
 }
 
 let map, infoWindow, geocoder;
+
 function initMap() {
   const directionsService = new google.maps.DirectionsService();
   const directionsRenderer = new google.maps.DirectionsRenderer();
@@ -207,7 +208,7 @@ function initMap() {
     directionsRenderer.setMap(null);
   })
 
-  map.addListener("click", (mapsMouseEvent) => {
+  map.addListener("click", function (mapsMouseEvent) {
     document.getElementById('clear-btn').disabled = false;
     setMarkerOnClick(mapsMouseEvent, map);
     originCoords = mapsMouseEvent.latLng;
@@ -289,7 +290,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 let click = 0;
 
-const LinkRedirect = function (response) {
+function LinkRedirect(response) {
   setTimeout(function () {
     const origin = response.request.origin.location;
     const destination = response.request.destination.location;
