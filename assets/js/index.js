@@ -244,8 +244,9 @@ function initMap() {
     }
   });
 }
+
 class AutocompleteDirectionsHandler {
-  varructor(map) {
+  constructor(map) {
     this.map = map;
     this.travelMode = google.maps.TravelMode.DRIVING;
     var originInput = document.getElementById("origin-input");
