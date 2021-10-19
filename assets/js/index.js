@@ -338,19 +338,23 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 }
 
 
-document.getElementById('action-close').addEventListener('click', () => {
-  const actions = document.getElementById('actions');
-  const accordion = document.getElementById('accordion');
-  click += 1;
+const action = document.getElementById('action-close')
 
-  if (click === 1) {
-    actions.classList.add('hide');
-    accordion.classList.add('hide');
-  } else if (click === 2) {
-    actions.classList.remove('hide');
-    accordion.classList.remove('hide');
-    click = 0;
-  }
-
+if (action) {
+  action.addEventListener('click', () => {
+    const actions = document.getElementById('actions');
+    const accordion = document.getElementById('accordion');
+    click += 1;
   
-})
+    if (click === 1) {
+      actions.classList.add('hide');
+      accordion.classList.add('hide');
+    } else if (click === 2) {
+      actions.classList.remove('hide');
+      accordion.classList.remove('hide');
+      click = 0;
+    }
+  
+    
+  })
+}
