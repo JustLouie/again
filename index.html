@@ -70,14 +70,12 @@
   
   
   <div id="map"></div>
-
-  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-  <script src="https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTNgMHYznC1RVPFyGnoG7iFUMYZ9HdX-Y&callback=initMap&libraries=places&v=weekly"
     async
   ></script>
-  <script type='text/babel' src="assets/js/index.js"></script>
+  <script src="./assets/js/index.js"></script>
 </body>
 </html>
