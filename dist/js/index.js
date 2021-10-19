@@ -1,12 +1,26 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = require('babel-runtime/helpers/createClass');
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = require('babel-runtime/helpers/asyncToGenerator');
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 var setMarkers = function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(map, geocoder) {
+  var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(map, geocoder) {
     var locations, categories, i, location, position, locationInfowindow, _marker;
 
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    return _regenerator2.default.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -61,9 +75,7 @@ var setMarkers = function () {
   };
 }();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var markers = [],
     marker,
@@ -74,9 +86,9 @@ var markers = [],
 var elem = document.querySelector('#origin-input');
 
 var getMarkers = function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+  var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
     var response;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regenerator2.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -294,7 +306,7 @@ function initMap() {
 
 var AutocompleteDirectionsHandler = function () {
   function AutocompleteDirectionsHandler(map) {
-    _classCallCheck(this, AutocompleteDirectionsHandler);
+    (0, _classCallCheck3.default)(this, AutocompleteDirectionsHandler);
 
     this.map = map;
     this.travelMode = google.maps.TravelMode.DRIVING;
@@ -312,7 +324,7 @@ var AutocompleteDirectionsHandler = function () {
   // Sets a listener on a radio button to change the filter type on Places
   // Autocomplete.
 
-  _createClass(AutocompleteDirectionsHandler, [{
+  (0, _createClass3.default)(AutocompleteDirectionsHandler, [{
     key: 'setupPlaceChangedListener',
     value: function setupPlaceChangedListener(autocomplete, mode) {
       autocomplete.bindTo("bounds", this.map);
@@ -328,7 +340,6 @@ var AutocompleteDirectionsHandler = function () {
       });
     }
   }]);
-
   return AutocompleteDirectionsHandler;
 }();
 
