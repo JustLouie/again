@@ -2,7 +2,7 @@ var markers = [], marker, destMarker, originCoords, destinationCoords;
 
 const elem = document.querySelector('#origin-input');
 
-const getMarkers = async () => {
+const getMarkers = async function () {
   const response = await fetch('https://again.ge/api/map', {
     method: 'GET',
     headers: {
@@ -12,11 +12,13 @@ const getMarkers = async () => {
   return response.json();
 }
 
-const getCategories = (list) => {
+const getCategories = function(list) {
   const categories = [];
 
   list.forEach(item => {
-    const category = categories.find(it => it.type.name === item.type.name);
+    const category = categories.find(function(it) {
+      return it.type.name === item.type.name
+    });
 
     if (!category) {
       categories.push(item);
@@ -27,7 +29,7 @@ const getCategories = (list) => {
   return categories;
 }
 
-const setCategories = (list) => {
+const setCategories = function (list) {
   const wrapper = document.getElementById('categories');
   list.forEach(category => {
     const div = document.createElement('div');
@@ -44,7 +46,7 @@ const setCategories = (list) => {
 
 }
 
-const addMarkerActions = (map) => {
+const addMarkerActions = function (map) {
   markers.forEach(m => {
     m.addListener('mouseover', function() {
       m.setAnimation(google.maps.Animation.BOUNCE);
@@ -120,7 +122,7 @@ function setFormattedAddress (geocoder, latLng, input = document.getElementById(
   })
 }
 
-const setMarkerOnClick = (e, map) => {
+const setMarkerOnClick = function (e, map) {
 
   const latLng = e.latLng || e.geometry.location;
 
@@ -139,7 +141,7 @@ const setMarkerOnClick = (e, map) => {
   setFormattedAddress(geocoder, latLng);
 }
 
-const setDestMarkerOnClick = (e, map) => {
+const setDestMarkerOnClick = function(e, map) {
 
   const latLng = e.latLng || e.geometry.location;
 
@@ -218,7 +220,7 @@ function initMap() {
 
   const locationButton = document.getElementById('current-location');
 
-  locationButton.addEventListener("click", () => {
+  locationButton.addEventListener("click", function () {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -287,8 +289,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 let click = 0;
 
-const LinkRedirect = (response) => {
-  setTimeout(() => {
+const LinkRedirect = function (response) {
+  setTimeout(function () {
     const origin = response.request.origin.location;
     const destination = response.request.destination.location;
     const travelMode = response.request.travelMode;
@@ -319,7 +321,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
       destination: destinationCoords,
       travelMode: google.maps.TravelMode.DRIVING,
     })
-    .then((response) => {
+    .then(function (response) {
       directionsRenderer.setDirections(response);
 
       if (window.innerWidth <= 768) {
@@ -341,7 +343,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 const action = document.getElementById('action-close')
 
 if (action) {
-  action.addEventListener('click', () => {
+  action.addEventListener('click', function () {
     const actions = document.getElementById('actions');
     const accordion = document.getElementById('accordion');
     click += 1;
@@ -354,7 +356,6 @@ if (action) {
       accordion.classList.remove('hide');
       click = 0;
     }
-  
     
   })
 }
