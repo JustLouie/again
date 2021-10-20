@@ -186,8 +186,8 @@ body{
 .categories {
     width: 100%;
     margin-top: 10px;
-    display: flex;
     gap: 10px;
+    display: flex;
 }
 .categories .category {
     display: grid;
@@ -320,5 +320,10 @@ body{
         margin-top: 15px;
         padding: 10px 0px;
         padding-right: 20px;
+        gap: unset;
+    }
+
+    .categories .category {
+        padding: 7px;
     }
 }
