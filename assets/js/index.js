@@ -52,7 +52,7 @@ function addMarkerActions (map) {
       {
         height: 80,
         width: 80,
-        url: "https://i.ibb.co/BZmkGtB/Group-1.png",
+        url: "https://i.ibb.co/BZmkGtB/Group-1.png"
       }
     ]
   });
@@ -62,7 +62,9 @@ function setMarkers (map, geocoder) {
     $.ajax({
       url: 'https://again.ge/api/map',
       success: function(result) {
-          var locations = result
+          var locations = result;
+
+          alert('yeah i am here')
 
           var categories = getCategories(locations);
           setCategories(categories);
@@ -128,7 +130,7 @@ function setMarkerOnClick (e, map) {
     marker = new google.maps.Marker({
       position: latLng,
       map,
-    })
+    });
   } else {
     marker.setPosition(latLng);
   }
@@ -178,16 +180,18 @@ function initMap() {
   geocoder = new google.maps.Geocoder();
 
   directionsRenderer.setMap(map);
-  var onChangeHandler = function (e) {
+
+  function onChangeHandler(e) {
     document.getElementById('clear-btn').disabled = false;
   };
-  document.getElementById("search").addEventListener("click", () => {
+
+  document.getElementById("search").addEventListener("click", function () {
     calculateAndDisplayRoute(directionsService, directionsRenderer);
   });
   document.getElementById("origin-input").addEventListener("change", onChangeHandler);
   document.getElementById("destination-input").addEventListener("change", onChangeHandler);
 
-  document.getElementById('clear-btn').addEventListener('click', (e) => {
+  document.getElementById('clear-btn').addEventListener('click', function (e) {
     document.getElementById("origin-input").value = '';
     document.getElementById("destination-input").value = '';
     document.getElementById('clear-btn').disabled = true;
