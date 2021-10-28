@@ -59,13 +59,10 @@ function addMarkerActions (map) {
 }
 
 function setMarkers (map, geocoder) {
-    alert('yeah I am outside ajax')
     $.ajax({
       url: 'https://again.ge/api/map',
       success: function(result) {
           var locations = result;
-
-          alert('yeah i am in ajax request')
 
           var categories = getCategories(locations);
           setCategories(categories);
