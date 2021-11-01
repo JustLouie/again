@@ -172,6 +172,7 @@ function initMap() {
     mapTypeControl: false,
     zoom: 14.1,
     streetViewControl: false,
+    gestureHandling: 'greedy',
     center: {lat:  41.72276088034398, lng: 44.75888040785368 },
   });
 
